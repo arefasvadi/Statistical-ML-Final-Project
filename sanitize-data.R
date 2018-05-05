@@ -16,7 +16,7 @@ library(tidyr)
 #Santitize data
 
 #set current working directory
-wd <- "C:\\Users\\axa159430\\Desktop\\Statistical-ML-Final-Project"
+wd <- "/home/aref/projects/Statistical ML"
 setwd(wd)
 
 #load the initial dataset
@@ -58,7 +58,11 @@ hk.numeric <- hk.numeric %>% filter(q10Industry != '#NULL!')
 hk.vals <- hk.vals %>% filter(q10Industry != "")
 hk.numeric <- hk.numeric %>% filter(q10Industry != 0)
 #removing null values from hiring manager
-#It's clean
+hk.vals <- hk.vals %>% filter(q16HiringManager != '#NULL!')
+hk.numeric <- hk.numeric %>% filter(q16HiringManager != '#NULL!')
+hk.vals <- hk.vals %>% filter(q16HiringManager != "")
+hk.numeric <- hk.numeric %>% filter(q16HiringManager != 0)
+#it's clean
 #removing null values from emacs vs vim
 #maybe later can be used as latent variables
 hk.vals <- hk.vals %>% filter(q24VimorEmacs != '#NULL!')
@@ -68,10 +72,10 @@ hk.numeric <- hk.numeric %>% filter(q24VimorEmacs != 0)
 #select only related columns
 hk.vals <- hk.vals %>% select(q1AgeBeginCoding,q2Age,q3Gender,q4Education,
                               q5DegreeFocus,q8JobLevel,q9CurrentRole,
-                              q10Industry,q24VimorEmacs)
+                              q10Industry,q16HiringManager,q24VimorEmacs)
 hk.numeric <- hk.numeric %>% select(q1AgeBeginCoding,q2Age,q3Gender,q4Education,
                               q5DegreeFocus,q8JobLevel,q9CurrentRole,
-                              q10Industry,q24VimorEmacs)
+                              q10Industry,q16HiringManager,q24VimorEmacs)
 # write to output files
 # 15334 record selected
 write.csv(hk.numeric,file="dataset/hk.numeric.csv")
