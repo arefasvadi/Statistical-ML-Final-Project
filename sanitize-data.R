@@ -78,6 +78,6 @@ hk.numeric <- hk.numeric %>% select(q1AgeBeginCoding,q2Age,q3Gender,q4Education,
                               q10Industry,q16HiringManager,q24VimorEmacs)
 # write to output files
 # 15334 record selected
-write.csv(hk.numeric,file="dataset/hk.numeric.csv")
+write.csv(hk.numeric,file="dataset/hk.numeric.csv",row.names=F,quote=F)
 write.csv(hk.vals,file="dataset/hk.vals.csv")
 
