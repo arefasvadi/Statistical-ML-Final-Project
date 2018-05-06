@@ -16,7 +16,7 @@ function [classifications, accuracy] = predictCLT(unimarg, pairmarg, tree, featu
     end
             
     observations = size(test,1);
-    actual = test(1:observations,9);
+    actual = test(1:observations,feature);
     error = observations;
     
     degree = numel(neibrs);
@@ -36,10 +36,13 @@ function [classifications, accuracy] = predictCLT(unimarg, pairmarg, tree, featu
             pm_j=pm{1,3};
             
             pb = pm_dist(pm_i==unim_features(i),pm_j==(feature_observed)); %marginal pair dist
-            if pb ==0 
-                pb = numel(pm_dist)/(numel(pm_dist)+N); % if it didn't show up in training do a thing
+            if (isempty(pb)) 
+                pb = numel(pm_dist)/(numel(pm_dist)+observations); % if it didn't show up in training do a thing
             end
-            score(i) = score(i) + log(pb);
+            if (pb~=0)
+                score(i) = score(i) + log(pb);
+            end
+               
         end
     end
      [~,idx] = max(score);
